@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一份神秘礼物</title>
+
+    <link rel="icon" href="favicon_io/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 初始弹窗 -->
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="card-emoji">🎁</span>
+                <h2 class="modal-title">神秘的礼物</h2>
+            </div>
+            <div class="modal-body">
+                您有一份神秘礼物，确定要打开吗？
+            </div>
+            <div class="modal-footer">
+                <button class="btn-confirm" id="confirmBtn">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 祝福卡片容器 -->
+    <div class="blessings-container" id="blessingsContainer"></div>
+
+    <!-- 音乐图标 -->
+    <div class="music-icon" id="musicIcon">🎵</div>
+
+    <!-- 音频元素（你需要替换为实际的音乐文件） -->
+    <audio id="bgMusic" loop>
+        <source src="./周杰伦 - 稻香.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
