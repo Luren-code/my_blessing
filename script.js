@@ -127,12 +127,16 @@ function generateBlessingCard() {
     }
     
     // 随机位置（确保不超出屏幕，考虑移动端边距）
-    const padding = screenWidth <= 480 ? 10 : 20;
-    const maxX = Math.max(0, screenWidth - cardMaxWidth - padding);
-    const maxY = Math.max(0, screenHeight - cardMaxHeight - padding);
+    const padding = screenWidth <= 480 ? 5 : 10;
+    const maxX = screenWidth - cardMaxWidth - padding;
+    const maxY = screenHeight - cardMaxHeight - padding;
     
-    const x = Math.random() * maxX + padding;
-    const y = Math.random() * maxY + padding;
+    // 确保范围是正数
+    const safeMaxX = Math.max(padding, maxX);
+    const safeMaxY = Math.max(padding, maxY);
+    
+    const x = Math.random() * (safeMaxX - padding) + padding;
+    const y = Math.random() * (safeMaxY - padding) + padding;
     
     card.style.left = `${x}px`;
     card.style.top = `${y}px`;
