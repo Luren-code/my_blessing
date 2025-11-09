@@ -107,47 +107,42 @@ function generateBlessingCard() {
         <div class="card-content">${blessing}</div>
     `;
     
-    // 响应式计算卡片尺寸和位置
+    // 先设置为不可见并添加到DOM，以便获取实际尺寸
+    card.style.opacity = '0';
+    card.style.visibility = 'hidden';
+    blessingsContainer.appendChild(card);
+    
+    // 获取卡片实际渲染后的尺寸
+    const cardWidth = card.offsetWidth;
+    const cardHeight = card.offsetHeight;
+    
+    // 获取屏幕尺寸
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
     
-    // 根据屏幕宽度动态计算卡片最大宽度
-    let cardMaxWidth = 280;
-    let cardMaxHeight = 150;
+    // 设置合理的边距
+    const padding = screenWidth <= 480 ? 10 : 20;
     
-    if (screenWidth <= 360) {
-        cardMaxWidth = 150;
-        cardMaxHeight = 120;
-    } else if (screenWidth <= 480) {
-        cardMaxWidth = 180;
-        cardMaxHeight = 130;
-    } else if (screenWidth <= 768) {
-        cardMaxWidth = 220;
-        cardMaxHeight = 140;
-    }
+    // 计算可用空间
+    const availableWidth = screenWidth - cardWidth - (padding * 2);
+    const availableHeight = screenHeight - cardHeight - (padding * 2);
     
-    // 随机位置（确保不超出屏幕，考虑移动端边距）
-    const padding = screenWidth <= 480 ? 5 : 10;
-    const maxX = screenWidth - cardMaxWidth - padding;
-    const maxY = screenHeight - cardMaxHeight - padding;
-    
-    // 确保范围是正数
-    const safeMaxX = Math.max(padding, maxX);
-    const safeMaxY = Math.max(padding, maxY);
-    
-    const x = Math.random() * (safeMaxX - padding) + padding;
-    const y = Math.random() * (safeMaxY - padding) + padding;
+    // 随机位置
+    const x = padding + Math.random() * Math.max(0, availableWidth);
+    const y = padding + Math.random() * Math.max(0, availableHeight);
     
     card.style.left = `${x}px`;
     card.style.top = `${y}px`;
     
-    // 添加到容器
-    blessingsContainer.appendChild(card);
-    cardCount++;
-    
     // 添加随机旋转角度
     const rotation = (Math.random() - 0.5) * 10; // -5度到5度之间
     card.style.transform = `rotate(${rotation}deg)`;
+    
+    // 恢复可见性，添加渐显动画
+    card.style.visibility = 'visible';
+    card.style.opacity = '1';
+    
+    cardCount++;
 }
 
 // 防止页面刷新时音乐停止
