@@ -107,11 +107,32 @@ function generateBlessingCard() {
         <div class="card-content">${blessing}</div>
     `;
     
-    // 随机位置（确保不超出屏幕）
-    const maxX = window.innerWidth - 300;
-    const maxY = window.innerHeight - 150;
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    // 响应式计算卡片尺寸和位置
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    
+    // 根据屏幕宽度动态计算卡片最大宽度
+    let cardMaxWidth = 280;
+    let cardMaxHeight = 150;
+    
+    if (screenWidth <= 360) {
+        cardMaxWidth = 150;
+        cardMaxHeight = 120;
+    } else if (screenWidth <= 480) {
+        cardMaxWidth = 180;
+        cardMaxHeight = 130;
+    } else if (screenWidth <= 768) {
+        cardMaxWidth = 220;
+        cardMaxHeight = 140;
+    }
+    
+    // 随机位置（确保不超出屏幕，考虑移动端边距）
+    const padding = screenWidth <= 480 ? 10 : 20;
+    const maxX = Math.max(0, screenWidth - cardMaxWidth - padding);
+    const maxY = Math.max(0, screenHeight - cardMaxHeight - padding);
+    
+    const x = Math.random() * maxX + padding;
+    const y = Math.random() * maxY + padding;
     
     card.style.left = `${x}px`;
     card.style.top = `${y}px`;
@@ -131,4 +152,34 @@ window.addEventListener('beforeunload', function() {
         clearInterval(intervalId);
     }
 });
+
+// 处理窗口大小变化（主要用于移动端横竖屏切换）
+let resizeTimer;
+window.addEventListener('resize', function() {
+    // 防抖处理，避免频繁触发
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        // 可以在这里添加重新布局的逻辑
+        // 目前卡片会自动适应新的屏幕尺寸
+        console.log('屏幕尺寸已改变');
+    }, 250);
+});
+
+// 防止移动端双击放大
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(event) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+
+// 优化移动端滚动体验
+document.addEventListener('touchmove', function(event) {
+    // 允许音乐图标的触摸交互
+    if (event.target.closest('.music-icon') || event.target.closest('.btn-confirm')) {
+        return;
+    }
+}, { passive: true });
 

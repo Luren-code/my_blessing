@@ -196,6 +196,7 @@ body {
     height: 60px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
+    display: none;
     align-items: center;
     justify-content: center;
     font-size: 28px;
@@ -203,7 +204,9 @@ body {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     z-index: 999;
     animation: pulse 2s ease infinite;
-    display: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .music-icon.playing {
@@ -225,6 +228,246 @@ body {
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   移动端响应式设计
+   ============================================ */
+
+/* 平板设备 (768px 及以下) */
+@media screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    /* 弹窗优化 */
+    .modal {
+        width: 85%;
+        max-width: 400px;
+        margin: 0 20px;
+    }
+
+    .modal-header {
+        padding: 16px 20px;
+    }
+
+    .modal-title {
+        font-size: 18px;
+    }
+
+    .modal-body {
+        padding: 24px 20px;
+        font-size: 15px;
+    }
+
+    .modal-footer {
+        padding: 12px 20px;
+    }
+
+    .btn-confirm {
+        padding: 10px 28px;
+        font-size: 15px;
+    }
+
+    /* 祝福卡片优化 */
+    .blessing-card {
+        min-width: 150px;
+        max-width: 220px;
+        padding: 14px 16px;
+    }
+
+    .card-header {
+        font-size: 12px;
+    }
+
+    .card-emoji {
+        font-size: 15px;
+    }
+
+    .card-content {
+        font-size: 14px;
+    }
+
+    /* 音乐图标优化 */
+    .music-icon {
+        width: 50px;
+        height: 50px;
+        bottom: 25px;
+        right: 25px;
+        font-size: 24px;
+    }
+}
+
+/* 手机设备 (480px 及以下) */
+@media screen and (max-width: 480px) {
+    /* 弹窗进一步优化 */
+    .modal {
+        width: 90%;
+        max-width: 340px;
+        margin: 0 15px;
+        border-radius: 12px;
+    }
+
+    .modal-header {
+        padding: 14px 16px;
+        gap: 8px;
+    }
+
+    .modal-title {
+        font-size: 17px;
+    }
+
+    .card-emoji {
+        font-size: 20px;
+    }
+
+    .modal-body {
+        padding: 20px 16px;
+        font-size: 14px;
+    }
+
+    .modal-footer {
+        padding: 10px 16px;
+    }
+
+    .btn-confirm {
+        padding: 9px 24px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    /* 祝福卡片进一步优化 */
+    .blessing-card {
+        min-width: 130px;
+        max-width: 180px;
+        padding: 12px 14px;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        font-size: 11px;
+        gap: 4px;
+        margin-bottom: 6px;
+    }
+
+    .card-emoji {
+        font-size: 14px;
+    }
+
+    .card-content {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    /* 音乐图标进一步优化 */
+    .music-icon {
+        width: 46px;
+        height: 46px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 22px;
+    }
+}
+
+/* 小屏手机设备 (360px 及以下) */
+@media screen and (max-width: 360px) {
+    .modal {
+        width: 92%;
+        max-width: 300px;
+    }
+
+    .modal-header {
+        padding: 12px 14px;
+    }
+
+    .modal-title {
+        font-size: 16px;
+    }
+
+    .modal-body {
+        padding: 18px 14px;
+        font-size: 13px;
+    }
+
+    .modal-footer {
+        padding: 8px 14px;
+    }
+
+    .btn-confirm {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+
+    .blessing-card {
+        min-width: 110px;
+        max-width: 150px;
+        padding: 10px 12px;
+    }
+
+    .card-content {
+        font-size: 12px;
+    }
+
+    .music-icon {
+        width: 42px;
+        height: 42px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+}
+
+/* 横屏适配 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .overlay {
+        padding: 10px;
+    }
+
+    .modal {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-body {
+        padding: 16px 20px;
+    }
+
+    .music-icon {
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .btn-confirm:hover {
+        background: #007AFF;
+        transform: none;
+    }
+
+    .btn-confirm:active {
+        background: #0051D5;
+        transform: scale(0.98);
+    }
+
+    .music-icon {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .blessing-card {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* 高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .modal {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .blessing-card {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     }
 }
 
