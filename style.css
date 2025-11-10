@@ -9,6 +9,19 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+    padding: 16px 0;
+    text-align: center;
+    color: #ffffff;
 }
 
 /* 遮罩层 */
