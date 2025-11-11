@@ -17,6 +17,24 @@ body {
     flex: 1;
 }
 
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60vh;
+}
+
+.background p {
+    font-size: 100px;
+    color: #ffffff;
+}
+
+.background span{
+    font-size: 130px;
+    color: #ffffff;
+}
+
 footer {
     margin-top: auto;
     padding: 16px 0;
